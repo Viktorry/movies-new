@@ -36,7 +36,7 @@ a.navbar-header{
 .nav-item{
 }
 .nav-item:hover{
-    background-color: grey;
+   // background-color: grey;
     border-radius: 5px;
 }
 ul.navbar-nav:hover{
@@ -252,10 +252,23 @@ a h6{
 }
 #jumb2.lader{
     height: 30px;
-
     background-color: black;
 }
-
+#fname{
+    margin-bottom: 20px;
+    width: 450px;
+}
+#home1{
+    background-color: #3a3a3a;
+    border-color: #3a3a3a;
+    font-size: 16px;
+    font-family: 'Source Serif Pro', serif;
+    margin-left: 10px;
+}
+#home1:hover{
+    background-color:grey;
+    border-color: #3a3a3a;
+}
 
 
 

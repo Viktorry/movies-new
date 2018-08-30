@@ -1,5 +1,8 @@
+body {
+    background-color:grey;
+}
 .header {
-    color: grey;
+    color: white;
     font-size: 27px;
     padding: 10px;
 }

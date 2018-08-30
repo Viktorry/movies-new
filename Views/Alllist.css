@@ -1,0 +1,20 @@
+body{
+    background-color: grey;
+}
+#list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+li {
+    display: inline;
+    float:right;
+    margin-top: 25px;
+}
+#list li button {
+        background-color: lightgrey;
+    color: black;
+}
+h1{
+    color: white;
+}

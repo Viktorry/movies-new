@@ -40,49 +40,23 @@
                 <div id="result" style="display:none;"></div>
                 <form class="form-horizontal" id="form">
                     <fieldset>
-                        <legend class="text-left header">Insert Actor</legend>
+                        <legend class="text-left header">Insert Genre</legend>
                         <div class="form-group">
-                            <h4 style="color: white">Actor:</h4>
+                            <h4 style="color: white">Genre:</h4>
                             <div class="col-md-8">
-                                <input id="fname" name="actor" type="text" placeholder="InsertActor" class="form-control">
+                                <input id="fname" name="genre" type="text" placeholder="InsertGenre" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-12 text-center">
-                                <button type="reset" id="btnInsert" value="insertactor" class="btn btn-primary btn-lg" style="background: 	#100b0a;border-color: 	#100b0a">InsertActor</button>
+                                <button type="reset" id="btnInsert" value="insertgenre" class="btn btn-primary btn-lg" style="background: 	#100b0a;border-color: 	#100b0a">InsertGenre</button>
                             </div>
                         </div>
-                        <input type="hidden" value="insertactor" name="page">
+                        <input type="hidden" value="insertgenre" name="page">
                     </fieldset>
                 </form>
-               <!-- <form action="./index.php?page=showactors" method="post">
-                    <input type="submit" name="showactors" class="btn btn-primary btn-lg" value="ShowallActors">
-                </form>-->
-                <?php
-                if(isset($msg)){
-                    echo $msg;
-                }
-
-                ?>
                 <br>
                 <a href="./index.php?page=showadminspage" style="color:#100b0a">Back</a>
-                <!--<table border='2' class="table table-dark">
-                    --><?php
-/*                        if ($_SERVER ["REQUEST_METHOD"] == "POST") {
-                            if (isset($_POST['showactors'])) {
-                                foreach ($act as $row) {
-                                    echo "
-                      
-                            <tr>
-                                <td>" . $row['actor'] . "</td>
-                                <td><a href='./index.php?&page=deleteactor&id=".$row['actor_id']."'=> Delete </td>
-                                <td><a href='./index.php?page=editactor&id=".$row['actor_id']."'=>Edit  </td>
-                            </tr>";
-
-                                }
-                            }
-                        }
-                        */?>
             </div>
         </div>
     </div>

@@ -10,7 +10,7 @@ require_once "Controller/Controller.php";
 $controller= new Controller();
 
 if(!isset($page)){
-    header('Location:index.php?page=user');
+    header('Location:index.php?page=showhomepage');
 }
 
 switch($page){
@@ -21,22 +21,37 @@ switch($page){
     case 'showmoviesform':
         $controller->showInsertForm();
         break;
+    case 'showadminspage':
+        $controller->showAdminPage();
+        break;
     case 'insertmovie':
         $controller->insertMovie();
+        break;
+    case 'insertgenre':
+       $controller->insertGenre();
         break;
     case 'insertactor':
         $controller->insertActors();
         break;
     case 'showactorsform':
-        $controller->showInsertForm2();
+        $controller->showActorsInsertForm();
         break;
-    case 'insertactor':
-        $controller->insertActors();
+    case 'showActors':
+        $controller->showActortable();
+        break;
+    case 'showMovies':
+        $controller->showMovietable();
+        break;
+    case 'showGenres':
+        $controller->showGenretable();
         break;
     case 'showactors':
         $controller->showActors();
         break;
-    case 'showmovies':
+    case 'showgenres':
+        $controller->showGenres();
+        break;
+        case 'showmovies':
         $controller->showMovies();
         break;
     case 'deletemovie':
@@ -57,8 +72,47 @@ switch($page){
     case 'updateactor':
         $controller->updateActor();
         break;
+    case 'jsonMovies':
+        $controller->showMoviesJson();
+        break;
+    case 'jsonActors':
+        $controller->showActorsJson();
+        break;
+    case 'jsonGenres':
+        $controller->showGenresJson();
+        break;
+    case 'jsonUsers':
+        $controller->showUsersJson();
+        break;
         case 'updatepicture':
         $controller->showPictupt();
+        break;
+    case 'showgenresform':
+        $controller->showGenresForm();
+        break;
+    case 'insertagm':
+       $controller->insertagm();
+        break;
+    case 'login':
+        $controller->Login();
+        break;
+    case 'register':
+        $controller->Register();
+        break;
+    case 'logout':
+        $controller->Logout();
+        break;
+    case 'usershomepage':
+        $controller->showUsersHomePage();
+        break;
+    case 'showhomepage':
+        $controller->showHomePage();
+        break;
+    case 'showadminspage':
+        $controller->showAdminPage();
+        break;
+    case 'showadminshomepage':
+        $controller->showAdminsHomePage();
         break;
     default:
         die('404');

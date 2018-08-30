@@ -1,21 +1,31 @@
 <?php
-require_once './Configuration/DB.php';
-
+/*require_once './Configuration/DB.php';*/
+require_once $_SERVER['DOCUMENT_ROOT'].'/test-project/movies_new3/Configuration/DB.php';
 class Model {
     private $db;
     //Get all upiti
     private $getallmovies="SELECT * FROM movies";
     private $getallactors="SELECT * FROM actors";
+    private $getallgenres="SELECT * FROM genres";
+    private $getallusers="SELECT * FROM users";
     private $getallnews="SELECT * FROM movie";
     private $getmoviebyid="SELECT * FROM movies WHERE movies_id=?";
     private $getactorbyid="SELECT * FROM actors WHERE actor_id=?";
+    private $selectuserbyid = "SELECT * FROM users WHERE user_id = ?";
+    private $selectuserbyusername = "SELECT * FROM users WHERE username= ?";
+    private $selectuserbyuseremail = "SELECT * FROM users WHERE email= ?";
+    private $userexistbyusername = "SELECT count(*) FROM users WHERE username = ?";
+    private $userexistbyemail = "SELECT count(*) FROM users WHERE email = ?";
+    private $selectuserbypasswordandusername = "SELECT * FROM users WHERE username = ? AND pass = ?";
     // Insert upiti
     private $insertmovie="INSERT INTO movies(movies_name, movies_date, duration_time,ratings,youtube,imdb, url) VALUES (?,?,?,?,?,?,?)";
     private $insertactor="INSERT INTO actors(actor) VALUES (?)";
+    private $insertgenre="INSERT INTO genres(genre) VALUES (?)";
+    private $insertuser = "INSERT INTO users(username, email, pass) VALUES (?, ?, ?)";
     // private $insertactorifexist="INSERT INTO actors(actor) SELECT ? FROM actors WHERE NOT EXIST(SELECT actor FROM actors WHERE actor=?) LIMIT 1";
-    private $insertgenrese="INSERT INTO genres(genres) VALUES (?)";
     private $insertnews="INSERT INTO news(user_id, description) VALUES (?,?)";
     private $insertComment="INSERT INTO comment(comment,movie_id,user_id) VALUES (?,?,?)";
+    private $insertactorsgenresmovies="INSERT INTO actorsgenresinmovies(actor_id,genre_id,movie_id) VALUES (?,?,?)";
     // Delete upiti
     private $deleteMovie="DELETE FROM movies WHERE movies_id=?";
     private $deleteComment="DELETE FROM comment WHERE  comm_id=?";
@@ -73,6 +83,76 @@ class Model {
         }
         return $rr;
     }
+    public function getUserByUsernameAndPassword($username,$pass)
+    {
+        $statement = $this->db->prepare($this->selectuserbypasswordandusername);
+        $statement->bindValue(1, $username);
+        $statement->bindValue(2, $pass);
+        $result=$statement->execute();
+        $rr=NULL;
+        if($result){
+            $rr = $statement->fetch();
+        }
+        return $rr;
+    }
+    public function getUserByUsername($username)
+    {
+        $statement = $this->db->prepare($this->selectuserbyusername);
+        $statement->bindValue(1, $username);
+        $result=$statement->execute();
+        $rr=NULL;
+        if($result){
+            $rr = $statement->fetch();
+        }
+        return $rr;
+    }
+    public function getUserByEmail($email)
+    {
+        $statement = $this->db->prepare($this->selectuserbyuseremail);
+        $statement->bindValue(1, $email);
+        $result=$statement->execute();
+        $rr=NULL;
+        if($result){
+            $rr = $statement->fetch();
+        }
+        return $rr;
+    }
+
+    public function userExistByUsername($username)
+    {
+        $statement = $this->db->prepare($this->userexistbyusername);
+        $statement->bindValue(1, $username);
+        $result=$statement->execute();
+        $rr=NULL;
+        if($result){
+            $rr = $statement->fetch();
+        }
+        return $rr;
+    }
+    public function userExistByEmail($email)
+    {
+        $statement = $this->db->prepare($this->userexistbyusername);
+        $statement->bindValue(1, $email);
+        $result=$statement->execute();
+        $rr=NULL;
+        if($result){
+            $rr = $statement->fetch();
+        }
+        return $rr;
+    }
+
+    public function selectUserById($user_id)
+    {
+        $statement = $this->db->prepare($this->selectuserbyid);
+        $statement->bindValue(1, $user_id);
+        $result=$statement->execute();
+        $rr=NULL;
+        if($result){
+            $rr = $statement->fetch();
+        }
+        return $rr;
+    }
+
     public function getactorsbyid($id)
     {
         $stm = $this->db->prepare($this->getactorbyid);
@@ -90,13 +170,23 @@ class Model {
         $result=$stm->execute();
         $rr=NULL;
         if($result){
-                $rr = $stm->fetchAll();
+            $rr = $stm->fetchAll();
         }
         return $rr;
     }
     public function getAllactors()
     {
         $stm = $this->db->prepare($this->getallactors);
+        $result=$stm->execute();
+        $rr=NULL;
+        if($result){
+            $rr = $stm->fetchAll();
+        }
+        return $rr;
+    }
+    public function getAllGenres()
+    {
+        $stm = $this->db->prepare($this->getallgenres);
         $result=$stm->execute();
         $rr=NULL;
         if($result){
@@ -113,6 +203,16 @@ class Model {
             $rr = $stm->fetchAll();
         }
         return $rr;
+    }
+    public function getAllUsers()
+    {
+    $stm = $this->db->prepare($this->getallusers);
+    $result=$stm->execute();
+    $rr=NULL;
+    if($result){
+        $rr = $stm->fetchAll();
+    }
+    return $rr;
     }
 
     //Insert Methods
@@ -139,10 +239,19 @@ class Model {
 
     public function insertGenres($genres)
     {
-        $statement=$this->db->prepare($this->insertgenrese);
+        $statement=$this->db->prepare($this->insertgenre);
         $statement->bindValue(1,$genres);
         $statement->execute();
     }
+    public function insertUsers($username, $email, $pass)
+    {
+        $statement = $this->db->prepare($this->insertuser);
+        $statement->bindValue(1, $username);
+        $statement->bindValue(2, $email);
+        $statement->bindValue(3, $pass);
+        $statement->execute();
+    }
+
     public function insertNews($user_id,$description)
     {
         $statement=$this->db->prepare($this->insertnews);
@@ -156,6 +265,14 @@ class Model {
         $statement->bindValue(1,$comment);
         $statement->bindValue(2,$movie_id);
         $statement->bindValue(3,$user_id);
+        $statement->execute();
+    }
+    public function insertActorsGenresMovies($actor_id,$genre_id,$movie_id)
+    {
+        $statement=$this->db->prepare($this->insertactorsgenresmovies);
+        $statement->bindValue(1,$actor_id);
+        $statement->bindValue(2,$genre_id);
+        $statement->bindValue(3,$movie_id);
         $statement->execute();
     }
 
