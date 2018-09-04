@@ -18,3 +18,9 @@ li {
 h1{
     color: white;
 }
+#myTableact td :hover {
+    color: grey;
+}
+
+
+

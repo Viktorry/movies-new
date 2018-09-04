@@ -11,6 +11,7 @@ class Model {
     private $getallnews="SELECT * FROM movie";
     private $getmoviebyid="SELECT * FROM movies WHERE movies_id=?";
     private $getactorbyid="SELECT * FROM actors WHERE actor_id=?";
+    private $getgenrebyid="SELECT * FROM genres WHERE genres_id=?";
     private $selectuserbyid = "SELECT * FROM users WHERE user_id = ?";
     private $selectuserbyusername = "SELECT * FROM users WHERE username= ?";
     private $selectuserbyuseremail = "SELECT * FROM users WHERE email= ?";
@@ -43,7 +44,7 @@ class Model {
     //------------------UPITI NAD VISE TABELA------------------------//
     private $selectMoviesandActors= "SELECT actors.*, movies.* FROM actors JOIN actorsinmovies ON actors.actor_id = actorsinmovies.actor_id JOIN movies ON actorsinmovies.movies_id = movies.movies_id";
     private $deleteMoviesandActors="DELETE FROM actorsinmovies WHERE movies_id=? AND actors_id=?";
-
+    private $selectallmoviesactorsandgenres="SELECT movies.*, actors.*, genres.* FROM movies  JOIN actorsgenresinmovies ON movies.movies_id = actorsgenresinmovies.movie_id JOIN actors ON actors.actor_id=actorsgenresinmovies.actor_id JOIN genres ON genres.genres_id = actorsgenresinmovies.genre_id";
 
 
     //Conn established
@@ -79,7 +80,7 @@ class Model {
         $result=$stm->execute();
         $rr=NULL;
         if($result){
-            $rr = $stm->fetch();
+            $rr = $stm->fetch(PDO::FETCH_ASSOC);
         }
         return $rr;
     }
@@ -164,6 +165,17 @@ class Model {
         }
         return $rr;
     }
+    public function getgenresbyid($id)
+    {
+        $stm = $this->db->prepare($this->getgenrebyid);
+        $stm->bindValue(1,$id);
+        $result=$stm->execute();
+        $rr=NULL;
+        if($result){
+            $rr = $stm->fetch();
+        }
+        return $rr;
+    }
     public function getAllmovies()
     {
         $stm = $this->db->prepare($this->getallmovies);
@@ -206,13 +218,23 @@ class Model {
     }
     public function getAllUsers()
     {
-    $stm = $this->db->prepare($this->getallusers);
-    $result=$stm->execute();
-    $rr=NULL;
-    if($result){
-        $rr = $stm->fetchAll();
+        $stm = $this->db->prepare($this->getallusers);
+        $result=$stm->execute();
+        $rr=NULL;
+        if($result){
+            $rr = $stm->fetchAll();
+        }
+        return $rr;
     }
-    return $rr;
+    public function getActorsGenresMovies()
+    {
+        $statement=$this->db->prepare($this->selectallmoviesactorsandgenres);
+        $result=$statement->execute();
+        $rr=NULL;
+        if($result){
+            $rr = $statement->fetchAll();
+        }
+        return $rr;
     }
 
     //Insert Methods
@@ -360,3 +382,4 @@ class Model {
 
 }
 ?>
+

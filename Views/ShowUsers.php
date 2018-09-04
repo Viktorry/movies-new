@@ -6,7 +6,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-    <link href="/test-project/movies_new3/Views/Alllist.css" rel="stylesheet">
+    <link href="/movies_new6/Views/Alllist.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
@@ -78,24 +78,27 @@
 </table>
 <div id="result"></div>
 -->
-<h1>Actors:</h1><br>
-<table border="2px" width="100%" bgcolor="white">
+<h1>Users:</h1><br>
+<table border="1px"style="opacity: 0.7" width="100%" bgcolor="white">
     <tr>
-        <th>actor_id</th>
-        <th>actor</th>
+        <th>users_id</th>
+        <th>user</th>
+        <th>email</th>
+        <th>Admin</th>
     </tr>
     <?php
-    foreach($act as $row) {
+    foreach($user as $row) {
         echo "
         <tr>
-            <td>".$row['actor_id'] ."</td>
-            <td>".$row['actor'] ."</td>
-            <td><a href='index.php?page=editactor&id=".$row['actor_id']."'>Edit  </td>
-            <td><a href='index.php?page=deleteactor&id=".$row['actor_id']."'>Delete </td>
+            <td>".$row['user_id'] ."</td>
+            <td>".$row['username'] ."</td>
+            <td>".$row['email'] ."</td>
+            <td><a href='index.php?page=deleteuser&id=".$row['user_id']."'>Delete </td>
         </tr>";
     }
     ?>
-</table>
+
+</table><br>
 <a href="./index.php?page=showadminspage" style="color:#100b0a">Back</a>
 </body>
 </html>

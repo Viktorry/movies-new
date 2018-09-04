@@ -15,7 +15,7 @@
                 var dataForm = $("#form").serialize();
                 $.ajax({
                     type: "GET",
-                    url: '/test-project/movies_new/index.php',
+                    url: '/test-project/movies_new3/index.php',
                     data: dataForm,
                     success: function(output) {
                         $("#result").html('<h1>' + output + '</h1>');

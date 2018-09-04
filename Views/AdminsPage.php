@@ -120,7 +120,7 @@
                         </td>
                         <td>
                             <a href="/test-project/movies_new3/index.php?page=showActors" ><button type="button" class="btn btn-secondary">Actors list</button><br>
-
+                                <a href="/test-project/movies_new3/index.php?page=showUsers" ><button type="button" class="btn btn-secondary">Users list</button><br>
                         </td>
                     </tr>
                     <tr align="center">

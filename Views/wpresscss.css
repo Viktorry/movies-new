@@ -269,6 +269,9 @@ a h6{
     background-color:grey;
     border-color: #3a3a3a;
 }
+img.img-thumbnail{
+    margin: 0px;
+}
 
 
 

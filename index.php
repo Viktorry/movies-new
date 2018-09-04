@@ -28,7 +28,7 @@ switch($page){
         $controller->insertMovie();
         break;
     case 'insertgenre':
-       $controller->insertGenre();
+        $controller->insertGenre();
         break;
     case 'insertactor':
         $controller->insertActors();
@@ -39,35 +39,41 @@ switch($page){
     case 'showActors':
         $controller->showActortable();
         break;
+    case 'showUsers':
+        $controller->showUserstable();
+        break;
     case 'showMovies':
         $controller->showMovietable();
         break;
     case 'showGenres':
         $controller->showGenretable();
         break;
-    case 'showactors':
-        $controller->showActors();
-        break;
     case 'showgenres':
         $controller->showGenres();
         break;
-        case 'showmovies':
+    case 'showmovies':
         $controller->showMovies();
         break;
     case 'deletemovie':
         $controller->deleteMovies();
         break;
     case 'deleteactor':
-        $controller->deleteAct();
+        $controller->deleteActor();
         break;
     case 'updatemovie':
         $controller->updateMovie();
+        break;
+    case 'updategenre':
+        $controller->updateGenres();
         break;
     case 'editmovie':
         $controller->editMovie();
         break;
     case 'editactor':
         $controller->editActor();
+        break;
+    case 'editgenre':
+        $controller->editGenre();
         break;
     case 'updateactor':
         $controller->updateActor();
@@ -84,14 +90,14 @@ switch($page){
     case 'jsonUsers':
         $controller->showUsersJson();
         break;
-        case 'updatepicture':
+    case 'updatepicture':
         $controller->showPictupt();
         break;
     case 'showgenresform':
         $controller->showGenresForm();
         break;
     case 'insertagm':
-       $controller->insertagm();
+        $controller->insertagm();
         break;
     case 'login':
         $controller->Login();

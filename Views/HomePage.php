@@ -1,3 +1,7 @@
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'].'/test-project/movies_new3/Controller/Controller.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -233,24 +237,63 @@
 
         </div>
         <div class="row">
-            <div class="col-xs-12 col-sm-4 col-lg-2">
-                <img src="/test-project/movies_new3/Views/img/Sl2.jpg" class="img-thumbnail">
+            <div class="col-xs-12 col-sm-4 col-lg-2" style="text-align:center">
+                <img src="/test-project/movies_new3/Views/img/index.jpeg" href="" class="img-thumbnail">
+                <?php
+                $novi = new Controller();
+                $n=$novi->showMovieHomePage();
+                ?>
+                <?php
+                    if($n["movies_name"] = "The Shawshank Redemption"){
+                        echo '<h5 style="color: white">'.$n["movies_name"].'(1994)'.'</h5>';
+                    }
+                ?>
             </div>
 
-            <div class="col-xs-12 col-sm-4 col-lg-2">
-                <img src="/test-project/movies_new3/Views/img/Sl2.jpg" class="img-thumbnail">
+
+            <div class="col-xs-12 col-sm-4 col-lg-2" style="text-align:center">
+                <img src="/test-project/movies_new3/Views/img/gf3.jpeg" class="img-thumbnail">
+                <?php
+                if($n["movies_name"] = "The Godfather"){
+                    echo '<h5 style="color: white">'.$n["movies_name"].'(1972)'.'</h5>';
+                }
+                ?>
             </div>
-            <div class="col-xs-12 col-sm-4 col-lg-2">
-                <img src="/test-project/movies_new3/Views/img/Sl2.jpg" class="img-thumbnail">
+            <div class="col-xs-12 col-sm-4 col-lg-2" style="text-align:center">
+                <img src="/test-project/movies_new3/Views/img/index.jpg" class="img-thumbnail">
+
+                <?php
+                if($n["movies_name"] = "The Dark Knight"){
+                    echo '<h5 style="color: white">'.$n["movies_name"].'(1994)'.'</h5>';
+                }
+                ?>
             </div>
-            <div class="col-xs-12 col-sm-4 col-lg-2">
-                <img src="/test-project/movies_new3/Views/img/Sl2.jpg" class="img-thumbnail">
+            <div class="col-xs-12 col-sm-4 col-lg-2" style="text-align:center">
+                <img src="/test-project/movies_new3/Views/img/Inception.jpeg" class="img-thumbnail">
+
+                <?php
+                if($n["movies_name"] = "Inception"){
+                    echo '<h5 style="color: white">'.$n["movies_name"].'(1994)'.'</h5>';
+                }
+                ?>
             </div>
-            <div class="col-xs-12 col-sm-4 col-lg-2">
-                <img src="/test-project/movies_new3/Views/img/Sl2.jpg" class="img-thumbnail">
+            <div class="col-xs-12 col-sm-4 col-lg-2" style="text-align:center">
+                <img src="/test-project/movies_new3/Views/img/fc1.jpeg" class="img-thumbnail">
+
+                <?php
+                if($n["movies_name"] = "Fight Club"){
+                    echo '<h5 style="color: white">'.$n["movies_name"].'(1994)'.'</h5>';
+                }
+                ?>
             </div>
-            <div class="col-xs-12 col-sm-4 col-lg-2">
+            <div class="col-xs-12 col-sm-4 col-lg-2" style="text-align:center">
                 <img src="/test-project/movies_new3/Views/img/Sl2.jpg" class="img-thumbnail">
+
+                <?php
+                if($n["movies_name"] = "The Shawshank Redemption"){
+                    echo '<h5 style="color: white">'.$n["movies_name"].'(1994)'.'</h5>';
+                }
+                ?>
             </div>
         </div>
         <div class="row">
@@ -423,7 +466,6 @@
         </div>
     </div>
 </div>
-
 
 
 

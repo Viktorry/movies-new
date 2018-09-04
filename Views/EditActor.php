@@ -9,7 +9,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-    <link href="Form.css" rel="stylesheet">
+    <script>
+        $(document).ready(function() {
+            $("#btnInsert").click(function(){
+                var dataForm = $("#form").serialize();
+                $.ajax({
+                    type: "GET",
+                    url: '/test-project/movies_new3/index.php',
+                    data: dataForm,
+                    success: function(output) {
+                        $("#result").html('<h1>' + output + '</h1>');
+                        $("#result").show(1000);
+                        setTimeout(function () {
+                            $("#result").hide(1000);
+                        }, 5000);
+                    }
+                });
+            });
+        });
+    </script>
+    <link href="/test-project/movies_new3/Views/Form.css" rel="stylesheet">
 </head>
 
 </head>
@@ -18,12 +37,14 @@
     <div class="row">
         <div class="col-md-12">
             <div class="well well-sm">
-                <form class="form-horizontal" action="./index.php?page=updateactor" method="post">
+                <div id="result" style="display:none;"></div>
+                <form class="form-horizontal" id="form">
                     <fieldset>
+                        <legend class="text-left header">Edit Actor</legend>
                         <div class="form-group">
-                           Actor:
+                            <h4 style="color: white">Actor:</h4>
                             <div class="col-md-8">
-                                <input id="fname" name="actor" type="text" placeholder="InsertActor" class="form-control">
+                                <input id="fname" name="actor" type="text" placeholder="EditActor" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
@@ -33,19 +54,23 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-12 text-center">
-                                <button type="submit"   value="Update" class="btn btn-primary btn-lg">UpdateActor</button>
+                                <button type="reset" id="btnInsert" value="insertactor" class="btn btn-primary btn-lg" style="background: 	#100b0a;border-color: 	#100b0a">InsertActor</button>
                             </div>
                         </div>
+                        <input type="hidden" value="updateactor" name="page">
                     </fieldset>
                 </form>
-                <a href="./index.php?page=showactors">InsertActor</a><br>
-                <a href="./index.php?page=user">All</a>
+                <!-- <form action="./index.php?page=showactors" method="post">
+                     <input type="submit" name="showactors" class="btn btn-primary btn-lg" value="ShowallActors">
+                 </form>-->
                 <?php
                 if(isset($msg)){
                     echo $msg;
                 }
 
                 ?>
+                <br>
+                <a href="./index.php?page=showActors" style="color:#100b0a">Back</a>
             </div>
         </div>
     </div>
