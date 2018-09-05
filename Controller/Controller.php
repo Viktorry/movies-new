@@ -143,21 +143,24 @@ class Controller
         $movie_id=$this->test_input($_GET['movies_id']);
         $movie = new Model();
         $movie->deleteAllmoviesandActors($movie_id);
-        //header("Location:index.php?page=all");
+        $msg='Movie deleted';
+        echo  $msg;
     }
     public function deleteActor()
     {
         $actor_id=$this->test_input($_GET['id']);
         $actor = new Model();
         $actor->deleteActor($actor_id);
-        include ('./Views/ShowActors.php');
+        $msg='Movie deleted';
+        echo  $msg;
     }
     public function deleteGenre()
     {
         $genre_id=$this->test_input($_GET['id']);
         $genre = new Model();
         $genre->deleteGenres($genre_id);
-        include ('./Views/ShowGenres.php');
+        $msg='Movie deleted';
+        echo  $msg;
     }
     public function insertMovie()
     {
@@ -247,13 +250,6 @@ class Controller
         $movie = new Model();
         $movie->deleteMovie($id);
         include './Views/ShowMovies.php';
-    }
-    public function deleteAct()
-    {
-        $actor_id=$this->test_input($_GET['id']);
-        $actor = new Model();
-        $actor->deleteActor($actor_id);
-        //include './Views/AddActors.php';
     }
     public function updateMovie()
     {
