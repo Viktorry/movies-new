@@ -1,8 +1,10 @@
 <?php
 /*require ("./Model/Model.php");*/
 require $_SERVER['DOCUMENT_ROOT'].'/test-project/movies_new3/Model/Model.php';
+    include 'Messagetraints.php';
 class Controller
 {
+        use Message;
         //Function for input validation!!!
     function test_input($data)
     {
@@ -17,8 +19,7 @@ class Controller
         if (isset($_SESSION['Loged in'])) {
             include ("./Views/UsersPage.php");
         }else{
-            header("Location: /test-project/movies_new3/Views/HomePage.php");
-        }
+            Message::insrtheaderHomePage();        }
     }
     public function showInsertForm()
     {
@@ -26,8 +27,7 @@ class Controller
         if (isset($_SESSION['Loged in'])) {
             include("./Views/AddMovie.php");
         }else{
-            header("Location: /test-project/movies_new3/Views/HomePage.php");
-        }
+            Message::insrtheaderHomePage();        }
     }
     public function showActorTable()
     {
@@ -37,8 +37,7 @@ class Controller
             $act = $actors->getAllactors();
             include("./Views/ShowActors.php");
         }else{
-            header("Location: /test-project/movies_new3/Views/HomePage.php");
-        }
+            Message::insrtheaderHomePage();        }
     }
     public function showActorMoviegenreTable()
     {
@@ -54,7 +53,7 @@ class Controller
             $user = $users->getAllUsers();
             include("./Views/ShowUsers.php");
         }else{
-            header("Location: /test-project/movies_new3/Views/HomePage.php");
+            Message::insrtheaderHomePage();
         }
     }
     public function showGenreTable()
@@ -65,7 +64,7 @@ class Controller
             $gen= $genres->getAllGenres();
             include("./Views/ShowGenres.php");
         }else{
-            header("Location: /test-project/movies_new3/Views/HomePage.php");
+            Message::insrtheaderHomePage();
         }
     }
     public function showMovieTable()
@@ -76,7 +75,7 @@ class Controller
             $mov= $movies->getAllmovies();
             include("./Views/ShowMovies.php");
         }else{
-            header("Location: /test-project/movies_new3/Views/HomePage.php");
+            Message::insrtheaderHomePage();
         }
     }
     public function showMovieHomePage()
@@ -100,7 +99,7 @@ class Controller
         if (isset($_SESSION['Loged in'])) {
             include("./Views/UsersHomePage.php");
         }else{
-            header("Location: /test-project/movies_new3/Views/HomePage.php");
+            Message::insrtheaderHomePage();
         }
     }
     public function showAdminsHomePage()
@@ -109,7 +108,7 @@ class Controller
         if (isset($_SESSION['Loged in'])) {
             include("./Views/AdminsHomePage.php");
         }else{
-            header("Location: /test-project/movies_new3/Views/HomePage.php");
+            Message::insrtheaderHomePage();
         }
     }
     public function showAdminPage()
@@ -118,7 +117,7 @@ class Controller
         if (isset($_SESSION['Loged in'])) {
             include("./Views/AdminsPage.php");
         }else{
-            header("Location: /test-project/movies_new3/Views/HomePage.php");
+            Message::insrtheaderHomePage();
         }
     }
     public function showActorsInsertForm()
@@ -127,7 +126,7 @@ class Controller
         if (isset($_SESSION['Loged in'])) {
             include("./Views/AddActors.php");
         }else{
-            header("Location: /test-project/movies_new3/Views/HomePage.php");
+            Message::insrtheaderHomePage();
         }
     }
     public function showGenresForm()
@@ -136,7 +135,7 @@ class Controller
         if (isset($_SESSION['Loged in'])) {
             include("./Views/AddGenre.php");
         }else{
-            header("Location: /test-project/movies_new3/Views/HomePage.php");
+           Message::insrtheaderHomePage();
         }
     }
     public function deleteMovie()
@@ -153,6 +152,13 @@ class Controller
         $actor->deleteActor($actor_id);
         include ('./Views/ShowActors.php');
     }
+    public function deleteGenre()
+    {
+        $genre_id=$this->test_input($_GET['id']);
+        $genre = new Model();
+        $genre->deleteGenres($genre_id);
+        include ('./Views/ShowGenres.php');
+    }
     public function insertMovie()
     {
         $movie = $this->test_input($_GET['movie']);
@@ -167,19 +173,16 @@ class Controller
             if ($movie != "" && $date != "" && $duration != "" && $ratings != "" && $youtube != ""  && $imdb != "" && $url != "") {
                 if (is_numeric($ratings)) {
                     $moviee->insertMovie($movie, $date, $duration, $ratings , $youtube ,$imdb, $url);
-                    $msg = "Insert successfull";
-                    echo $msg;
+                    Message::insrtsuccsses();
                 } else {
                     $msg = "Ratings is not numeric!!!";
                     echo $msg;
                 }
             } else {
-                $msg = "You must insert all input fields!!!";
-                echo $msg;
+                Message::insrtallmsg();
             }
         }else{
-            $msg = "Movie successfully inserted!!!";
-            echo $msg;
+            Message::insrtmethodwrong();
         }
     }
     public function insertActors()
@@ -190,15 +193,12 @@ class Controller
             if ($actor !="") {
                 if($actor)
                     $actors->insertActors($actor);
-                $msg = "Insert successfull";
-                echo $msg;
+                Message::insrtsuccsses();
             } else {
-                $msg = "You must insert actor!!!";
-                echo $msg;
+                Message::insrtallmsg();
             }
         }else{
-            $msg = "Method is not right!!!";
-            echo $msg;
+            Message::insrtmethodwrong();
         }
     }
     public function insertGenre()
@@ -209,15 +209,12 @@ class Controller
             if ($genre !="") {
                 if($genre)
                     $genres->insertGenres($genre);
-                $msg = "Insert successfull";
-                echo $msg;
+                Message::insrtsuccsses();
             } else {
-                $msg = "You must insert genre!!!";
-                echo $msg;
+                Message::insrtallmsg();
             }
         }else{
-            $msg = "Method is not right!!!";
-            echo $msg;
+            Message::insrtmethodwrong();
         }
     }
     public function showMoviesJson()
@@ -271,21 +268,27 @@ class Controller
         $moviee = new Model();
         if ($_SERVER ["REQUEST_METHOD"] == "GET") {
             if ($movie != "" && $date != "" && $duration != "" && $ratings != "" && $youtube != ""  && $imdb != "" && $url != "" && $movie_id !="") {
-                if (is_numeric($ratings)) {
-                    $moviee->updateMovies($movie_id,$movie, $date, $duration, $ratings , $youtube ,$imdb, $url);
-                    $msg = "Edit Succsessfull!!!";
-                    echo $msg;
-                } else {
-                    $msg = "Ratings is not numeric!!!";
-                    echo $msg;
+                if (preg_match("/^[a-zA-Z ]*$/",$movie)) {
+                    if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $imdb) && !preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$youtube) && !preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$url)) {
+                        if (is_numeric($ratings)) {
+                            $moviee->updateMovies($movie_id, $movie, $date, $duration, $ratings, $youtube, $imdb, $url);
+                            Message::insrtsuccsses();
+                        } else {
+                            $msg = "Ratings is not numeric!!!";
+                            echo $msg;
+                        }
+                    }else{
+                        $msg = "You must insert valid url adress!!!";
+                        echo $msg;
+                    }
+                }else{
+                    Message::insrtltrsandnumbrs();
                 }
             }else {
-                $msg = "You must insert all inputs!!!";
-                echo $msg;
+                Message::insrtallmsg();
             }
         }else{
-            $msg = "Method is wrong!!!";
-            echo $msg;
+            Message::insrtmethodwrong();
         }
     }
     public function updateActor()
@@ -295,16 +298,17 @@ class Controller
         $actors = new Model();
         if ($_SERVER ["REQUEST_METHOD"] == "GET") {
             if ($actor != ""&& $actor_id !="") {
+                if (preg_match("/^[a-zA-Z ]*$/",$actor)) {
                 $actors->updateActors($actor,$actor_id);
-                $msg="Edit Succsessfull";
-                echo $msg;
+                Message::insrtsuccsses();
+                }else{
+                    Message::insrtltrsandnumbrs();
+                }
             } else {
-                $msg = "You must insert all inputs!!!";
-                echo $msg;
+                Message::insrtallmsg();
             }
         }else{
-            $msg = "Method is wrong!!!";
-            echo $msg;
+            Message::insrtmethodwrong();
         }
     }
     public function updateGenres()
@@ -314,16 +318,17 @@ class Controller
         $genres = new Model();
         if ($_SERVER ["REQUEST_METHOD"] == "GET") {
             if ($genre != "" && $genre_id !="") {
-                $genres->updateGenres($genre,$genre_id);
-                $msg="Edit Succsessfull";
-                echo $msg;
+                 if (preg_match("/^[a-zA-Z ]*$/",$genre)) {
+                     $genres->updateGenres($genre, $genre_id);
+                     Message::insrtsuccsses();
+                 }else{
+                     Message::insrtltrsandnumbrs();
+                 }
             } else {
-                $msg = "You must insert all inputs!!!";
-                echo $msg;
+                Message::insrtallmsg();
             }
         }else{
-            $msg = "Method is wrong!!!";
-            echo $msg;
+            Message::insrtmethodwrong();
         }
     }
     public function editMovie()
@@ -364,8 +369,7 @@ class Controller
                     foreach ($genre_id as $gen) {
                         $object = new Model();
                         $object->insertActorsGenresMovies($act, $gen, $movie_id);
-                        $msg = "Insert successfull";
-                        echo $msg;
+                      Message::insrtsuccsses();
                     }
                 }
             } else {
@@ -373,8 +377,7 @@ class Controller
                 echo $msg;
             }
         } else {
-            $msg = 'You must chose all !!!';
-            echo $msg;
+            Message::insrtallmsg();
         }
     }
     public function Login(){
@@ -382,28 +385,31 @@ class Controller
         $password =$this->test_input($_GET['password']);
         // $admin= $_GET['Admin'];
         if(!empty($username) && !empty($password)){
-            $useri = new Model();
-            $users = $useri->getUserByUsernameAndPassword($username,$password);
-            //var_dump($users);
-            if ($users){
-                session_start();
-                $_SESSION['Loged in'] = serialize($users);
-                // var_dump($s);
-                if($users['Admin']==1){
-                    $msg="Admin";
-                    echo $msg;
-                }else{
-                    $msg="User";
+            if (preg_match("/^[a-zA-Z ]*$/",$username)) {
+                $useri = new Model();
+                $users = $useri->getUserByUsernameAndPassword($username, $password);
+                //var_dump($users);
+                if ($users) {
+                    session_start();
+                    $_SESSION['Loged in'] = serialize($users);
+                    // var_dump($s);
+                    if ($users['Admin'] == 1) {
+                        $msg = "Admin";
+                        echo $msg;
+                    } else {
+                        $msg = "User";
+                        echo $msg;
+                    }
+                } else {
+                    // LogIN ERROR
+                    $msg = 'Wrong parameters!!!';
                     echo $msg;
                 }
             }else{
-                // LogIN ERROR
-                $msg = 'Wrong parameters!!!';
-                echo $msg;
-            }
+                Message::insrtltrsandnumbrs();
+                }
         }else{
-            $msg = 'You must insert all fields!!!';
-            echo $msg;
+            Message::insrtallmsg();
         }
     }
     public function Register()
@@ -442,19 +448,17 @@ class Controller
                         echo $msg;
                     }
                 }else{
-                    $msg='Only letters and white space allowed!!!';
-                    echo $msg;
+                        Message::insrtltrsandnumbrs();
                 }
         } else {
-            $msg = "You must fill all fields!!!";
-            echo $msg;
+           Message::insrtallmsg();
         }
     }
     public function Logout(){
         session_start();
         session_unset();
         session_destroy();
-        header("Location: /test-project/movies_new3/Views/HomePage.php");
+        Message::insrtheaderHomePage();
     }
     private $fileFornats=['image/png','image/jpeg','image/jpg','image/gif'];
     public function updatePict($file)

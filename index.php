@@ -58,6 +58,9 @@ switch($page){
         $controller->deleteMovies();
         break;
     case 'deleteactor':
+        $controller->deleteGenre();
+        break;
+    case 'deletegenre':
         $controller->deleteActor();
         break;
     case 'updatemovie':
