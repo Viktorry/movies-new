@@ -1,3 +1,7 @@
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'].'/test-project/movies_new3/Controller/Controller.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/test-project/movies_new3/Model/Model.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -99,8 +103,29 @@
             </div>
             <br>
             <div class="col-xs-12 col-sm-4 col-lg-4 text-center">
-                <img class="imgdefault" src="/test-project/movies_new3/Views/img/default_avatar.jpg"><br>
-               <!-- <a href="/test-project/movies_new3/index.php?page=showgupdateform" ><button type="button" class="btn btn-secondary">Update</button></a>-->
+
+                <div>
+                    <?php
+                    $novi = new UploadPicture();
+                    $n=$novi->ShowPic();
+                        foreach ($n as $new) {
+                            if (in_array("download.jpeg", $new)) {
+                                echo "<div>";
+                                echo "<img src='/test-project/movies_new3/Views/img/" . $new['image'] . "' >";
+                                echo "</div>";
+                            }
+                        }
+                              ?>
+                        <form method="POST" action="index.php?page=uploadpicture" enctype="multipart/form-data">
+                        <input type="hidden" name="size" value="1000000">
+                        <div>
+                            <input type="file" name="image">
+                        </div>
+                        <div>
+                            <button type="submit" name="upload">Upload</button>
+                        </div>
+                    </form>
+                </div>
             </div>
             <div class="col-xs-12 col-sm-4 col-lg-4 text-center" id="formAddMovie">
                 <div id="result4" style="display:none;"></div>
@@ -146,7 +171,10 @@
 
                     </tr>
 
-
+                    <form action="index.php?page=uplvideo" method="POST" enctype="multipart/form-data">
+                        <input type="file" name="file" />
+                        <input type="submit" name="submit" value="Upload!" />
+                    </form>
                 </table>
             </div>
 

@@ -6,6 +6,8 @@ class Model {
     //Get all upiti
     private $getallmovies="SELECT * FROM movies";
     private $getallactors="SELECT * FROM actors";
+    private $getallvideos="SELECT * FROM videos";
+    private $getallpictures="SELECT * FROM pictures";
     private $getallgenres="SELECT * FROM genres";
     private $getallusers="SELECT * FROM users";
     private $getallnews="SELECT * FROM movie";
@@ -23,6 +25,8 @@ class Model {
     private $insertactor="INSERT INTO actors(actor) VALUES (?)";
     private $insertgenre="INSERT INTO genres(genre) VALUES (?)";
     private $insertuser = "INSERT INTO users(username, email, pass) VALUES (?, ?, ?)";
+    private $insertpictures="INSERT INTO pictures (image) VALUES (?)";
+    private $insertvideos="INSERT INTO videos (video,url) VALUES (?,?)";
     // private $insertactorifexist="INSERT INTO actors(actor) SELECT ? FROM actors WHERE NOT EXIST(SELECT actor FROM actors WHERE actor=?) LIMIT 1";
     private $insertnews="INSERT INTO news(user_id, description) VALUES (?,?)";
     private $insertComment="INSERT INTO comment(comment,movie_id,user_id) VALUES (?,?,?)";
@@ -182,6 +186,26 @@ class Model {
         $result=$stm->execute();
         $rr=NULL;
         if($result){
+            $rr = $stm->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return $rr;
+    }
+    public function getAllpictures()
+    {
+        $stm = $this->db->prepare($this->getallpictures);
+        $result=$stm->execute();
+        $rr=NULL;
+        if($result){
+            $rr = $stm->fetchAll();
+        }
+        return $rr;
+    }
+    public function getAllvideos()
+    {
+        $stm = $this->db->prepare($this->getallvideos);
+        $result=$stm->execute();
+        $rr=NULL;
+        if($result){
             $rr = $stm->fetchAll();
         }
         return $rr;
@@ -265,6 +289,12 @@ class Model {
         $statement->bindValue(1,$genres);
         $statement->execute();
     }
+    public function insertPictures($picture)
+    {
+        $statement=$this->db->prepare($this->insertpictures);
+        $statement->bindValue(1,$picture);
+        $statement->execute();
+    }
     public function insertUsers($username, $email, $pass)
     {
         $statement = $this->db->prepare($this->insertuser);
@@ -279,6 +309,13 @@ class Model {
         $statement=$this->db->prepare($this->insertnews);
         $statement->bindValue(1,$user_id);
         $statement->bindValue(2,$description);
+        $statement->execute();
+    }
+    public function inserVideos($video,$url)
+    {
+        $statement=$this->db->prepare($this->insertvideos);
+        $statement->bindValue(1,$video);
+        $statement->bindValue(2,$url);
         $statement->execute();
     }
     public function insertComment($comment,$movie_id,$user_id)

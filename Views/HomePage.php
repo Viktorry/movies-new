@@ -1,5 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/test-project/movies_new3/Controller/Controller.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/test-project/movies_new3/Model/Model.php';
 ?>
 
 <!DOCTYPE html>
@@ -236,17 +237,21 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/test-project/movies_new3/Controller/Con
 
 
         </div>
+        <?php
+        $novi = new Controller();
+        $n=$novi->showMovieHomePage();
+
+        ?>
         <div class="row">
             <div class="col-xs-12 col-sm-4 col-lg-2" style="text-align:center">
                 <img src="/test-project/movies_new3/Views/img/index.jpeg" href="" class="img-thumbnail">
                 <?php
-                $novi = new Controller();
-                $n=$novi->showMovieHomePage();
-                ?>
-                <?php
-                    if($n["movies_name"] = "The Shawshank Redemption"){
-                        echo '<h5 style="color: white">'.$n["movies_name"].'(1994)'.'</h5>';
+                foreach ($n as $new) {
+                    if(in_array("The Shawshank Redemption",$new)){
+                        echo '<h5 style="color: white">'.$new["movies_name"].'(1972)'.'</h5>';
                     }
+                }
+
                 ?>
             </div>
 
@@ -254,17 +259,22 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/test-project/movies_new3/Controller/Con
             <div class="col-xs-12 col-sm-4 col-lg-2" style="text-align:center">
                 <img src="/test-project/movies_new3/Views/img/gf3.jpeg" class="img-thumbnail">
                 <?php
-                if($n["movies_name"] = "The Godfather"){
-                    echo '<h5 style="color: white">'.$n["movies_name"].'(1972)'.'</h5>';
+                foreach ($n as $new) {
+                    if(in_array("The Godfather ",$new)){
+                        echo '<h5 style="color: white">'.$new["movies_name"].'(1972)'.'</h5>';
+                    }
                 }
+
                 ?>
             </div>
             <div class="col-xs-12 col-sm-4 col-lg-2" style="text-align:center">
                 <img src="/test-project/movies_new3/Views/img/index.jpg" class="img-thumbnail">
 
                 <?php
-                if($n["movies_name"] = "The Dark Knight"){
-                    echo '<h5 style="color: white">'.$n["movies_name"].'(1994)'.'</h5>';
+                foreach ($n as $new) {
+                    if(in_array("The Dark Knight",$new)){
+                        echo '<h5 style="color: white">'.$new["movies_name"].'(1972)'.'</h5>';
+                    }
                 }
                 ?>
             </div>
@@ -272,8 +282,10 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/test-project/movies_new3/Controller/Con
                 <img src="/test-project/movies_new3/Views/img/Inception.jpeg" class="img-thumbnail">
 
                 <?php
-                if($n["movies_name"] = "Inception"){
-                    echo '<h5 style="color: white">'.$n["movies_name"].'(1994)'.'</h5>';
+                foreach ($n as $new) {
+                    if(in_array("Inception ",$new)){
+                        echo '<h5 style="color: white">'.$new["movies_name"].'(1972)'.'</h5>';
+                    }
                 }
                 ?>
             </div>
@@ -281,8 +293,10 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/test-project/movies_new3/Controller/Con
                 <img src="/test-project/movies_new3/Views/img/fc1.jpeg" class="img-thumbnail">
 
                 <?php
-                if($n["movies_name"] = "Fight Club"){
-                    echo '<h5 style="color: white">'.$n["movies_name"].'(1994)'.'</h5>';
+                foreach ($n as $new) {
+                    if(in_array("Fight Club",$new)){
+                        echo '<h5 style="color: white">'.$new["movies_name"].'(1972)'.'</h5>';
+                    }
                 }
                 ?>
             </div>

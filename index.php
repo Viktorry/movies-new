@@ -8,6 +8,8 @@ $page = $_GET['page'];
 require_once "Controller/Controller.php";
 
 $controller= new Controller();
+$upl= new UploadVideo();
+$uplPic= new UploadPicture();
 
 if(!isset($page)){
     header('Location:index.php?page=showhomepage');
@@ -110,6 +112,12 @@ switch($page){
         break;
     case 'logout':
         $controller->Logout();
+        break;
+    case 'uplvideo':
+        $upl->UplVid();
+        break;
+    case 'uploadpicture':
+        $uplPic->UplPic();
         break;
     case 'usershomepage':
         $controller->showUsersHomePage();
