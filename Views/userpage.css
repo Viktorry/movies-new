@@ -278,6 +278,10 @@ a h6{
     background: grey;
     border-color: grey;
 }
+#btnInsertall1{
+    background: grey;
+    border-color: grey;
+}
 button.btn.btn-secondary{
     margin-bottom: 9px;
 }

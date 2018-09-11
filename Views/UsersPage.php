@@ -96,6 +96,22 @@
 
             });
             //ENDREGION :: .CLICK FUNCTIONS JQUERY::
+            $("#btnInsertall1").click(function(){
+                var dataForm = $("#insertAllForm1").serialize();
+                $.ajax({
+                    type: "GET",
+                    url: '/test-project/movies_new3/index.php',
+                    data: dataForm,
+                    success: function(output) {
+                        $("#result41").html('<h6>' + output + '</h6>');
+                        $("#result41").show(1000);
+                        setTimeout(function () {
+                            $("#result41").hide(1000);
+                        }, 5000);
+                    }
+                });
+
+            });
         });
     </script>
 
@@ -137,7 +153,7 @@
             </div>
         </div>
         <div class="row text-center padding">
-            <div class="col-xs-12 col-sm-4 col-lg-4 text-center" >
+            <div class="col-xs-12 col-sm-4 col-lg-3 text-center" >
 
                 <ul id="userList">
                     <li><h4>User id:User</h4></li>
@@ -148,13 +164,13 @@
                 </ul>
             </div>
                 <br>
-            <div class="col-xs-12 col-sm-4 col-lg-4 text-center">
+            <div class="col-xs-12 col-sm-4 col-lg-3 text-center">
                 <img src="/test-project/movies_new3/Views/img/default_avatar.jpg">
             </div>
-            <div class="col-xs-12 col-sm-4 col-lg-4 text-center" id="formAddMovie">
+            <div class="col-xs-12 col-sm-4 col-lg-3 text-center" id="formAddMovie">
                 <div id="result4" style="display:none;"></div>
 
-
+<!----------------------------------ACTORSINMOVIES---------------------------------->
                 <form  id="insertAllForm">
                 <h4>Add:</h4>
                 Select Movie:<br>
@@ -165,32 +181,51 @@
                 <select class="js-example-basic-single2" name="actors[]" style="width: 300px">
 
                 </select><br>
-                Select Genres:<br>
+            <!--    Select Genres:<br>
                 <select class="js-example-basic-single3" name="genres[]" style="width: 300px">
 
-                </select><br>
-                    <button type="reset" id="btnInsertall" value="insertagm" class="btn btn-primary btn-lg">Insert</button>
+                </select><br>-->
+                    <button type="reset" id="btnInsertall" value="insertactorsinmovies" class="btn btn-primary btn-lg">Insert</button>
 
-                    <input type="hidden" value="insertagm" name="page">
+                    <input type="hidden" value="insertactorsinmovies" name="page">
+
                 </form>
-                <!DOCTYPE html>
-                <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <title>Title</title>
-                </head>
-                <body>
-                <form action="index.php" method="post" enctype="multipart/form-data">
-                    <input type="file" name="file">
-                    <input type="submit" value="upload">
-                    <input type="hidden" value="Upload" name="page">
+            </div>
+
+            <!----------------------------------GENRESINMOVIES---------------------------------->
+
+                <div class="col-xs-12 col-sm-4 col-lg-3 text-center" id="formAddMovie">
+                    <div id="result41" style="display:none;"></div>
+                <form  id="insertAllForm1">
+                    <h4>Add:</h4>
+                    Select Movie:<br>
+                    <select class="js-example-basic-single" name='movies' style="width: 300px">
+                        <option></option>
+                    </select><br>
+                 <!--   Select Actor:<br>
+                    <select class="js-example-basic-single2" name="actors[]" style="width: 300px">
+
+                    </select><br>-->
+                        Select Genres:<br>
+                        <select class="js-example-basic-single3" name="genres[]" style="width: 300px">
+
+                        </select><br>
+                    <button type="reset" id="btnInsertall1" value="insertgenresinmovies" class="btn btn-primary btn-lg">Insert</button>
+
+                    <input type="hidden" value="insertgenresinmovies" name="page">
                 </form>
+
+                </div>
+
+
+
+
+
+
                 </body>
                 </html>
 
             </div>
-
-
         </div>
     </div>
 </div>
@@ -249,6 +284,7 @@
         if(isset($msg)) {
             echo $msg;
         }
+
         */?>
 
     </table>

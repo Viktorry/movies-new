@@ -65,7 +65,6 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/test-project/movies_new3/Model/Model.ph
 
 
 </head>
-<title>Word Press site</title>
 <body>
 <!----------Navbar------------->
 <nav class="navbar navbar-expand-md sticky-top">
@@ -100,303 +99,65 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/test-project/movies_new3/Model/Model.ph
         </div>
     </div>
 </nav>
-<!------------------- Courasel-------------------------->
-<div class="container-fluid" id="csl">
-    <div id="slides" class="carousel slide" data-ride="carousel">
-        <ul class="carousel-indicators">
-            <li data-target="#slides" data-slide-to="0" class="active"></li>
-            <li data-target="#slides" data-slide-to="1"></li>
-            <li data-target="#slides" data-slide-to="2"></li>
-        </ul>
-        <div class="carousel-inner">
-            <div class=" carousel-item active">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-xl-12">
-                        <img src="/test-project/movies_new3/Views/img/Joker3.jpg" class="Cour">
-                        <div class="carousel-caption text-center">
-                            <h1 class="display-4">Why so serious? <br>Don't worry little fella.</h1>
-                            <h5 >Do i look like a guy with the plan?</h5><br>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class=" carousel-item ">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-xl-12">
-                        <img src="/test-project/movies_new3/Views/img/inception-wallpapers-8.jpg" class="Cour">
-                        <div class="carousel-caption text-center">
-                            <h1 class="display-4">Dreams feel real while we're in them. </h1>
-                            <h5 > It's only when we wake up that we realize something was actually strange. </h5><br>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class=" carousel-item ">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-xl-12">
-                        <img src="/test-project/movies_new3/Views/img/Peaky3.jpg" class="Cour">
-                        <div class="carousel-caption text-center">
-                            <h1 class="display-4">Brave is going where no man has gone before. </h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--- One Column Section -->
-<div class="container  padding">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-xl-12 text-center" >
-            <h2 class="titlec">Follow us on social media</h2>
-
-        </div>
-    </div>
-    <div class="row text-center padding">
-        <div class="col-xs-3 col-sm-3 col-lg-1">
-            <button type="button" class="btn btn-md  btn4" id="1">Facebook</button>
-        </div>
-
-        <div class="col-xs-3 col-sm-3 col-lg-1">
-            <button type="button" class="btn btn-md  btn4">Tweeter</button>
-        </div>
-        <div class="col-xs-3 col-sm-3 col-lg-1">
-            <button type="button" class="btn btn-md  btn4">Pintester</button>
-        </div>
-        <div class="col-xs-3 col-sm-3 col-lg-1">
-            <button type="button" class="btn btn-md  btn4">Gmails</button>
-        </div>
-        <div class="col-xs-3 col-sm-3 col-lg-1">
-            <button type="button" class="btn btn-md  btn4">Linkedin</button>
-        </div>
-        <div class="col-xs-3 col-sm-3 col-lg-1">
-            <button type="button" class="btn btn-md  btn4">Mssangr</button>
-        </div>
-        <div class="col-xs-3 col-sm-3 col-lg-1">
-            <button type="button" class="btn btn-md  btn4">Tumblr</button>
-        </div>
-        <div class="col-xs-3 col-sm-3 col-lg-1">
-            <button type="button" class="btn btn-md  btn4">Digging</button>
-        </div>
-        <div class="col-xs-3 col-sm-3 col-lg-1">
-            <button type="button" class="btn btn-md  btn4">Google+</button>
-        </div>
-        <div class="col-xs-3 col-sm-3 col-lg-1">
-            <button type="button" class="btn btn-md  btn4">Whatsup</button>
-        </div>
-        <div class="col-xs-3 col-sm-3 col-lg-1">
-            <button type="button" class="btn btn-md  btn4">Vrathking</button>
-        </div>
-        <div class="col-xs-3 col-sm-3 col-lg-1">
-            <button type="button" class="btn btn-md  btn4">Xiiing</button>
-        </div>
-
-    </div>
-</div>
-<!--- Jumbotron1 -->
-<div class="jumbotron" id="jumb0">
-    <div class="container-fluid padding">
-        <div class="row text-center padding">
-            <div class="col-xs-3 col-sm-3 col-lg-1">
-                <h5 id="jumb2" class="lader" >MOVIES</h5><br>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-lg-1">
-                <h6 id="jumb2" class="t14" >New Releases</h6><br>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-lg-1" >
-                <h6 id="jumb2"  >Last aded</h6><br>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-lg-1">
-                <h6 id="jumb2" >Top 10 today</h6><br>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-lg-1">
-                <h6 id="jumb2" >Visitor last watched</h6><br>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-lg-1">
-                <h6 id="jumb2" >2018</h6><br>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-lg-1">
-                <h6 id="jumb2" >2017</h6><br>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-lg-1">
-                <h6 id="jumb2" >2016</h6><br>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-lg-1">
-                <h6 id="jumb2" >2015</h6><br>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-lg-1">
-                <h6 id="jumb2" >2014</h6><br>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-lg-1">
-                <h6 id="jumb2" >2013</h6><br>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-lg-1">
-                <h6 id="jumb2" >2012</h6><br>
-            </div>
-
-
-        </div>
+<div class="container padding">
         <?php
-        $novi = new Controller();
-        $n=$novi->showMovieHomePage();
+        $movie = new Model();
+        $videos = $movie->getAllmovies();
+       /* $actors= $mov->getAllpictures();*/
 
         ?>
         <div class="row">
-            <div class="col-xs-12 col-sm-4 col-lg-2" style="text-align:center">
-                <img src="/test-project/movies_new3/Views/img/index.jpeg" href="" class="img-thumbnail">
-                <?php
-                foreach ($n as $new) {
-                    if(in_array("The Shawshank Redemption",$new)){
-                        echo '<h5 style="color: white">'.$new["movies_name"].'(1972)'.'</h5>';
-                    }
-                }
+            <?php foreach ($videos as $video) { ?>
+                <div class="col-xs-12 col-sm-4 col-lg-2">
+                    <a href="/test-project/movies_new3/index.php?page=showmovie&id=<?php echo $video['movies_id'] ?>"><?php echo $video['movies_name'] ?></a>
+                </div>
+            <?php } ?>
+        </div>
+</div>
 
-                ?>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
+            <div class="modal-body">
+                <div id="result" style="display:none;"></div>
+                <form class="form-horizontal" id="form">
+                    <fieldset>
+                        <legend class="text-left header">Log in</legend>
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                Username: <br>
+                                <input id="fname" name="username" type="text" placeholder="InsertUsername" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                Password: <br>
+                                <input id="fname" name="password" type="password" placeholder="InsertPassword" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12 text-center">
+                                <button type="reset" id="btnInsert" value="login" class="btn btn-primary btn-lg" style="background: 	#100b0a;border-color: 	#100b0a">Log in</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <input type="hidden" value="login" name="page">
+                </form>
 
-
-            <div class="col-xs-12 col-sm-4 col-lg-2" style="text-align:center">
-                <img src="/test-project/movies_new3/Views/img/gf3.jpeg" class="img-thumbnail">
-                <?php
-                foreach ($n as $new) {
-                    if(in_array("The Godfather ",$new)){
-                        echo '<h5 style="color: white">'.$new["movies_name"].'(1972)'.'</h5>';
-                    }
-                }
-
-                ?>
             </div>
-            <div class="col-xs-12 col-sm-4 col-lg-2" style="text-align:center">
-                <img src="/test-project/movies_new3/Views/img/index.jpg" class="img-thumbnail">
-
-                <?php
-                foreach ($n as $new) {
-                    if(in_array("The Dark Knight",$new)){
-                        echo '<h5 style="color: white">'.$new["movies_name"].'(1972)'.'</h5>';
-                    }
-                }
-                ?>
-            </div>
-            <div class="col-xs-12 col-sm-4 col-lg-2" style="text-align:center">
-                <img src="/test-project/movies_new3/Views/img/Inception.jpeg" class="img-thumbnail">
-
-                <?php
-                foreach ($n as $new) {
-                    if(in_array("Inception ",$new)){
-                        echo '<h5 style="color: white">'.$new["movies_name"].'(1972)'.'</h5>';
-                    }
-                }
-                ?>
-            </div>
-            <div class="col-xs-12 col-sm-4 col-lg-2" style="text-align:center">
-                <img src="/test-project/movies_new3/Views/img/fc1.jpeg" class="img-thumbnail">
-
-                <?php
-                foreach ($n as $new) {
-                    if(in_array("Fight Club",$new)){
-                        echo '<h5 style="color: white">'.$new["movies_name"].'(1972)'.'</h5>';
-                    }
-                }
-                ?>
-            </div>
-            <div class="col-xs-12 col-sm-4 col-lg-2" style="text-align:center">
-                <img src="/test-project/movies_new3/Views/img/Sl2.jpg" class="img-thumbnail">
-
-                <?php
-                if($n["movies_name"] = "The Shawshank Redemption"){
-                    echo '<h5 style="color: white">'.$n["movies_name"].'(1994)'.'</h5>';
-                }
-                ?>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-4 col-lg-2">
-                <img src="/test-project/movies_new3/Views/img/Sl2.jpg" class="img-thumbnail">
-            </div>
-            <div class="col-xs-12 col-sm-4 col-lg-2">
-                <img src="/test-project/movies_new3/Views/img/Sl2.jpg" class="img-thumbnail">
-            </div>
-            <div class="col-xs-12 col-sm-4 col-lg-2">
-                <img src="/test-project/movies_new3/Views/img/Sl2.jpg" class="img-thumbnail">
-            </div>
-            <div class="col-xs-12 col-sm-4 col-lg-2">
-                <img src="/test-project/movies_new3/Views/img/Sl2.jpg" class="img-thumbnail">
-            </div>
-            <div class="col-xs-12 col-sm-4 col-lg-2">
-                <img src="/test-project/movies_new3/Views/img/Sl2.jpg" class="img-thumbnail">
-            </div>
-            <div class="col-xs-12 col-sm-4 col-lg-2">
-                <img src="/test-project/movies_new3/Views/img/Sl2.jpg" class="img-thumbnail">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-4 col-lg-2">
-                <img src="/test-project/movies_new3/Views/img/Sl2.jpg" class="img-thumbnail">
-            </div>
-            <div class="col-xs-12 col-sm-4 col-lg-2">
-                <img src="/test-project/movies_new3/Views/img/Sl2.jpg" class="img-thumbnail">
-            </div>
-            <div class="col-xs-12 col-sm-4 col-lg-2">
-                <img src="/test-project/movies_new3/Views/img/Sl2.jpg" class="img-thumbnail">
-            </div>
-            <div class="col-xs-12 col-sm-4 col-lg-2">
-                <img src="/test-project/movies_new3/Views/img/Sl2.jpg" class="img-thumbnail">
-            </div>
-            <div class="col-xs-12 col-sm-4 col-lg-2">
-                <img src="/test-project/movies_new3/Views/img/Sl2.jpg" class="img-thumbnail">
-            </div>
-            <div class="col-xs-12 col-sm-4 col-lg-2">
-                <img src="/test-project/movies_new3/Views/img/Sl2.jpg" class="img-thumbnail">
-            </div>
-        </div>
+
     </div>
 </div>
-<div class="container">
-    <!----------------- Modal ------------------->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div id="result" style="display:none;"></div>
-                    <form class="form-horizontal" id="form">
-                        <fieldset>
-                            <legend class="text-left header">Log in</legend>
-                            <div class="form-group">
-                                <div class="col-md-8">
-                                            Username: <br>
-                                    <input id="fname" name="username" type="text" placeholder="InsertUsername" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-8">
-                                    Password: <br>
-                                    <input id="fname" name="password" type="password" placeholder="InsertPassword" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12 text-center">
-                                    <button type="reset" id="btnInsert" value="login" class="btn btn-primary btn-lg" style="background: 	#100b0a;border-color: 	#100b0a">Log in</button>
-                                </div>
-                            </div>
-                        </fieldset>
-                                        <input type="hidden" value="login" name="page">
-                    </form>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
 </div>
 <div class="modal fade" id="myModal1" role="dialog">
     <div class="modal-dialog">
@@ -452,36 +213,5 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/test-project/movies_new3/Model/Model.ph
     </div>
 </div>
 </div>
-<!--- Jumbotron4 -->
-<div class="jumbotron" id="jumb4">
-    <div class="container padding">
-        <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-6 col-xl-12 text-center">
-                <ul class="list">
-                    <li>Themes</li>
-                    <li>Features</li>
-                    <li>Blog</li>
-                    <li>Status</li>
-                    <li>VIP</li>
-                    <li>Terms of Service</li>
-                    <li>Privacy Policy</li>
-                    <li>Language:EN</li>
-
-                </ul>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-xl-12">
-                    <ul class="list1">
-                        <li>An</li>
-                        <li><a href="#">AUTHOMATIC</a></li>
-                        <li>mambo</li>
-
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
 </body>
 </html>

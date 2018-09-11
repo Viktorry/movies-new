@@ -109,11 +109,11 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/test-project/movies_new3/Model/Model.ph
                     $novi = new UploadPicture();
                     $n=$novi->ShowPic();
                         foreach ($n as $new) {
-                            if (in_array("download.jpeg", $new)) {
+
                                 echo "<div>";
                                 echo "<img src='/test-project/movies_new3/Views/img/" . $new['image'] . "' >";
                                 echo "</div>";
-                            }
+
                         }
                               ?>
                         <form method="POST" action="index.php?page=uploadpicture" enctype="multipart/form-data">
@@ -173,7 +173,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/test-project/movies_new3/Model/Model.ph
 
                     <form action="index.php?page=uplvideo" method="POST" enctype="multipart/form-data">
                         <input type="file" name="file" />
-                        <input type="submit" name="submit" value="Upload!" />
+                        <input type="submit" name="submit" value="Upload" />
                     </form>
                 </table>
             </div>

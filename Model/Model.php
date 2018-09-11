@@ -2,53 +2,58 @@
 /*require_once './Configuration/DB.php';*/
 require_once $_SERVER['DOCUMENT_ROOT'].'/test-project/movies_new3/Configuration/DB.php';
 class Model {
-    private $db;
+    /**
+     * @var PDO
+     */
+    protected $db;
     //Get all upiti
-    private $getallmovies="SELECT * FROM movies";
-    private $getallactors="SELECT * FROM actors";
-    private $getallvideos="SELECT * FROM videos";
-    private $getallpictures="SELECT * FROM pictures";
-    private $getallgenres="SELECT * FROM genres";
-    private $getallusers="SELECT * FROM users";
-    private $getallnews="SELECT * FROM movie";
-    private $getmoviebyid="SELECT * FROM movies WHERE movies_id=?";
-    private $getactorbyid="SELECT * FROM actors WHERE actor_id=?";
-    private $getgenrebyid="SELECT * FROM genres WHERE genres_id=?";
-    private $selectuserbyid = "SELECT * FROM users WHERE user_id = ?";
-    private $selectuserbyusername = "SELECT * FROM users WHERE username= ?";
-    private $selectuserbyuseremail = "SELECT * FROM users WHERE email= ?";
-    private $userexistbyusername = "SELECT count(*) FROM users WHERE username = ?";
-    private $userexistbyemail = "SELECT count(*) FROM users WHERE email = ?";
-    private $selectuserbypasswordandusername = "SELECT * FROM users WHERE username = ? AND pass = ?";
+    protected $getallmovies="SELECT * FROM movies";
+    protected $getallactors="SELECT * FROM actors";
+    protected $getallvideos="SELECT * FROM videos";
+    protected $getallpictures="SELECT * FROM pictures";
+    protected $getallgenres="SELECT * FROM genres";
+    protected $getallusers="SELECT * FROM users";
+    protected $getallnews="SELECT * FROM movie";
+    protected $getpicturesbyid="SELECT * FROM pictures WHERE id=?";
+    protected $getactorbyid="SELECT * FROM actors WHERE actor_id=?";
+    protected $getgenrebyid="SELECT * FROM genres WHERE genres_id=?";
+    protected $selectuserbyusername = "SELECT * FROM users WHERE username= ?";
+    protected $selectuserbyuseremail = "SELECT * FROM users WHERE email= ?";
+    protected $userexistbyusername = "SELECT count(*) FROM users WHERE username = ?";
+    protected $userexistbyemail = "SELECT count(*) FROM users WHERE email = ?";
+    protected $getvideosbyid="SELECT * FROM videos WHERE id=?";
+    protected $selectuserbypasswordandusername = "SELECT * FROM users WHERE username = ? AND pass = ?";
     // Insert upiti
-    private $insertmovie="INSERT INTO movies(movies_name, movies_date, duration_time,ratings,youtube,imdb, url) VALUES (?,?,?,?,?,?,?)";
-    private $insertactor="INSERT INTO actors(actor) VALUES (?)";
-    private $insertgenre="INSERT INTO genres(genre) VALUES (?)";
-    private $insertuser = "INSERT INTO users(username, email, pass) VALUES (?, ?, ?)";
-    private $insertpictures="INSERT INTO pictures (image) VALUES (?)";
-    private $insertvideos="INSERT INTO videos (video,url) VALUES (?,?)";
-    // private $insertactorifexist="INSERT INTO actors(actor) SELECT ? FROM actors WHERE NOT EXIST(SELECT actor FROM actors WHERE actor=?) LIMIT 1";
-    private $insertnews="INSERT INTO news(user_id, description) VALUES (?,?)";
-    private $insertComment="INSERT INTO comment(comment,movie_id,user_id) VALUES (?,?,?)";
-    private $insertactorsgenresmovies="INSERT INTO actorsgenresinmovies(actor_id,genre_id,movie_id) VALUES (?,?,?)";
+    protected $insertmovie="INSERT INTO movies(movies_name, movies_date, duration_time,ratings,youtube,imdb, url) VALUES (?,?,?,?,?,?,?)";
+    protected $insertActorsinMovies= "INSERT INTO actorsinmovies (actor_id,movies_id) VALUES (?,?)";
+    protected $insertGenresinMovies= "INSERT INTO genresinmovies (genres_id,movies_id) VALUES (?,?)";
+    protected $insertactor="INSERT INTO actors(actor) VALUES (?)";
+    protected $insertgenre="INSERT INTO genres(genre) VALUES (?)";
+    protected $insertuser = "INSERT INTO users(username, email, pass) VALUES (?, ?, ?)";
+    protected $insertpictures="INSERT INTO pictures (image) VALUES (?)";
+    protected $insertvideos="INSERT INTO videos (video,url) VALUES (?,?)";
+    // protected $insertactorifexist="INSERT INTO actors(actor) SELECT ? FROM actors WHERE NOT EXIST(SELECT actor FROM actors WHERE actor=?) LIMIT 1";
+    protected $insertnews="INSERT INTO news(user_id, description) VALUES (?,?)";
+    protected $insertComment="INSERT INTO comment(comment,movie_id,user_id) VALUES (?,?,?)";
     // Delete upiti
-    private $deleteMovie="DELETE FROM movies WHERE movies_id=?";
-    private $deleteComment="DELETE FROM comment WHERE  comm_id=?";
-    private $deleteActor="DELETE FROM actors WHERE actor_id = ?";
-    private $deleteNews="DELETE FROM news WHERE news_id =?";
-    private $deleteGenres="DELETE FROM genres WHERE genres_id =?";
+    protected $deleteMovie="DELETE FROM movies WHERE movies_id=?";
+    protected $deleteComment="DELETE FROM comment WHERE  comm_id=?";
+    protected $deleteActor="DELETE FROM actors WHERE actor_id = ?";
+    protected $deleteNews="DELETE FROM news WHERE news_id =?";
+    protected $deleteGenres="DELETE FROM genres WHERE genres_id =?";
 
     //Update upiti
-    private $updateComment="UPDATE comments SET comments = ?, movie_id = ?, user_id = ? WHERE  comm_id = ?";
-    private $updateNews="UPDATE news SET description=?, user_id = ? WHERE  news_id = ?";
-    private $updateMovies="UPDATE movies SET movies_name=?, movies_date= ?,duration_time= ?,ratings=?,youtube=?,imdb=?,url=? WHERE  movies_id = ?";
-    private $updateActors="UPDATE actors SET actor=? WHERE  actor_id = ?";
-    private $updateGenres="UPDATE genres SET genre=?  WHERE genres_id =?";
+    protected $updateComment="UPDATE comments SET comments = ?, movie_id = ?, user_id = ? WHERE  comm_id = ?";
+    protected $updateNews="UPDATE news SET description=?, user_id = ? WHERE  news_id = ?";
+    protected $updateMovies="UPDATE movies SET movies_name=?, movies_date= ?,duration_time= ?,ratings=?,youtube=?,imdb=?,url=? WHERE  movies.movies_id = ?";
+    protected $updateActors="UPDATE actors SET actor=? WHERE  actor_id = ?";
+    protected $updateGenres="UPDATE genres SET genre=?  WHERE genres_id =?";
 
     //------------------UPITI NAD VISE TABELA------------------------//
-    private $selectMoviesandActors= "SELECT actors.*, movies.* FROM actors JOIN actorsinmovies ON actors.actor_id = actorsinmovies.actor_id JOIN movies ON actorsinmovies.movies_id = movies.movies_id";
-    private $deleteMoviesandActors="DELETE FROM actorsinmovies WHERE movies_id=? AND actors_id=?";
-    private $selectallmoviesactorsandgenres="SELECT movies.*, actors.*, genres.* FROM movies  JOIN actorsgenresinmovies ON movies.movies_id = actorsgenresinmovies.movie_id JOIN actors ON actors.actor_id=actorsgenresinmovies.actor_id JOIN genres ON genres.genres_id = actorsgenresinmovies.genre_id";
+    protected $selectMoviesandGenres= "SELECT genres.* FROM movies JOIN genresinmovies ON movies.movies_id = genresinmovies.movies_id JOIN genres ON genresinmovies.genres_id = genres.genres_id WHERE movies.movies_id=?";
+    protected $selectMoviesandActors= "SELECT actors.* FROM  movies JOIN actorsinmovies ON movies.movies_id = actorsinmovies.movies_id JOIN actors ON actorsinmovies.actor_id = actors.actor_id  WHERE movies.movies_id=?";
+    protected $deleteMoviesandActors="DELETE FROM actorsinmovies WHERE movies_id=? AND actors_id=?";
+    protected $selectallmoviesactorsandgenres="SELECT movies.*, actors.*, genres.* FROM movies  JOIN actorsgenresinmovies ON movies.movies_id = actorsgenresinmovies.movie_id JOIN actors ON actors.actor_id=actorsgenresinmovies.actor_id JOIN genres ON genres.genres_id = actorsgenresinmovies.genre_id";
 
 
     //Conn established
@@ -57,7 +62,7 @@ class Model {
         $this->db = DB::createInstance();
     }
     //Upiti nad vise tabela
-    public function getAllmoviesandActors()
+    /*public function getAllmoviesandActors()
     {
         $stm = $this->db->prepare($this->selectMoviesandActors);
         $result=$stm->execute();
@@ -66,7 +71,7 @@ class Model {
             $rr = $stm->fetchAll();
         }
         return $rr;
-    }
+    }*/
     public function deleteAllmoviesandActors($movie_id)
     {
         $statement = $this->db->prepare($this->deleteMoviesandActors);
@@ -74,17 +79,14 @@ class Model {
         $statement->execute();
     }
 
-
-
-    //SELECT all methods
-    public function getmoviesbyid($id)
+    public function getpicturesbyid($pic_id)
     {
-        $stm = $this->db->prepare($this->getmoviebyid);
-        $stm->bindValue(1,$id);
+        $stm = $this->db->prepare($this->getpicturesbyid);
+        $stm->bindValue(1,$pic_id);
         $result=$stm->execute();
         $rr=NULL;
         if($result){
-            $rr = $stm->fetch(PDO::FETCH_ASSOC);
+            $rr = $stm->fetch();
         }
         return $rr;
     }
@@ -169,6 +171,28 @@ class Model {
         }
         return $rr;
     }
+    public function getactorsinmoviesbyid($id)
+    {
+        $stm = $this->db->prepare($this->selectMoviesandActors);
+        $stm->bindValue(1,$id);
+        $result=$stm->execute();
+        $rr=NULL;
+        if($result){
+            $rr = $stm->fetchall();
+        }
+        return $rr;
+    }
+    public function getgenresinmoviesbyid($id)
+    {
+        $stm = $this->db->prepare($this->selectMoviesandGenres);
+        $stm->bindValue(1,$id);
+        $result=$stm->execute();
+        $rr=NULL;
+        if($result){
+            $rr = $stm->fetchall();
+        }
+        return $rr;
+    }
     public function getgenresbyid($id)
     {
         $stm = $this->db->prepare($this->getgenrebyid);
@@ -200,13 +224,24 @@ class Model {
         }
         return $rr;
     }
-    public function getAllvideos()
+    public function getAllvideos($id)
     {
         $stm = $this->db->prepare($this->getallvideos);
         $result=$stm->execute();
         $rr=NULL;
         if($result){
             $rr = $stm->fetchAll();
+        }
+        return $rr;
+    }
+    public function getVideosbyid($id)
+    {
+        $stm = $this->db->prepare($this->getvideosbyid);
+        $stm->bindValue(1,$id);
+        $result=$stm->execute();
+        $rr=NULL;
+        if($result){
+            $rr = $stm->fetchall();
         }
         return $rr;
     }
@@ -250,16 +285,7 @@ class Model {
         }
         return $rr;
     }
-    public function getActorsGenresMovies()
-    {
-        $statement=$this->db->prepare($this->selectallmoviesactorsandgenres);
-        $result=$statement->execute();
-        $rr=NULL;
-        if($result){
-            $rr = $statement->fetchAll();
-        }
-        return $rr;
-    }
+
 
     //Insert Methods
 
@@ -326,12 +352,18 @@ class Model {
         $statement->bindValue(3,$user_id);
         $statement->execute();
     }
-    public function insertActorsGenresMovies($actor_id,$genre_id,$movie_id)
+    public function insertActorsinMovies($act,$mov)
     {
-        $statement=$this->db->prepare($this->insertactorsgenresmovies);
-        $statement->bindValue(1,$actor_id);
-        $statement->bindValue(2,$genre_id);
-        $statement->bindValue(3,$movie_id);
+        $statement=$this->db->prepare($this->insertActorsinMovies);
+        $statement->bindValue(1,$act);
+        $statement->bindValue(2,$mov);
+        $statement->execute();
+    }
+    public function insertGenresinMovies($gen,$mov)
+    {
+        $statement=$this->db->prepare($this->insertGenresinMovies);
+        $statement->bindValue(1,$gen);
+        $statement->bindValue(2,$mov);
         $statement->execute();
     }
 

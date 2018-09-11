@@ -107,6 +107,15 @@ class Controller
             header("Location:/test-project/movies_new3/Views/UsersHomePage.php");
         }
     }
+    public function showMovie()
+    {
+      /*  session_start();
+        if (!isset($_SESSION['Loged in'])) {*/
+        include("./Views/movie.php");
+      /*  } else {
+            header("Location:/test-project/movies_new3/Views/UsersHomePage.php");
+        }*/
+    }
 
     public function showUsersHomePage()
     {
@@ -391,28 +400,60 @@ class Controller
         include("./Views/UpdatePicture.php");
     }
 
-    public function insertagm()
+
+    public function insertactorsinmovies()
     {
-        $movie_id = $this->test_input($_GET['movies']);
-        if (isset($_GET['actors']) && isset($_GET['genres']) && $movie_id != "") {
-            $actor_id = $_GET['actors'];
-            $genre_id = $_GET['genres'];
-            if (count($actor_id) > 0 && count($genre_id) > 0) {
-                foreach ($actor_id as $act) {
-                    foreach ($genre_id as $gen) {
-                        $object = new Model();
-                        $object->insertActorsGenresMovies($act, $gen, $movie_id);
-                        Message::insrtsuccsses();
-                    }
+        $movie = $this->test_input($_GET['movies']);
+
+        if ( $movie != "") {
+            $actors = $_GET['actors'];
+            if (count($actors) > 0) {
+                foreach ($actors as $act) {
+                    $object = new Model();
+                    $object->insertActorsinMovies($act, $movie);
+                    Message::insrtsuccsses();
                 }
-            } else {
-                $msg = 'There is no actors selected!!!';
-                echo $msg;
             }
         } else {
-            Message::insrtallmsg();
+            $msg = 'There is no movie selected!!!';
+            echo $msg;
         }
     }
+    public function insertgenresinmovies()
+    {
+        $movie = $this->test_input($_GET['movies']);
+
+        if ( $movie != "") {
+            $genres = $_GET['genres'];
+            if (count($genres) > 0) {
+                foreach ($genres as $gen) {
+                    $object = new Model();
+                    $object->insertGenresinMovies($gen, $movie);
+                    Message::insrtsuccsses();
+                }
+            }
+        } else {
+            $msg = 'There is no movie selected!!!';
+            echo $msg;
+        }
+    }
+    public function selectActorsinmoviesbyId()
+    {
+
+        $id = $this->test_input($_GET['id']);
+        $actor = new Model();
+        $act = $actor->getactorsinmoviesbyid($id);
+            return $act;
+    }
+    public function selectGenresinmoviesbyId()
+    {
+
+        $id = $this->test_input($_GET['id']);
+        $genre = new Model();
+        $gen = $genre->getgenresinmoviesbyid($id);
+        return $gen;
+    }
+
 
     public function Login()
     {
@@ -505,47 +546,54 @@ class Controller
 class UploadVideo{
     public function UplVid()
     {
-  /*      if(isset($_POST['submit']))
-        {
+        if(isset($_POST['submit'])) {
             $name = $_FILES['file']['name'];
             $temp = $_FILES['file']['tmp_name'];
-
-            move_uploaded_file($temp,"uploaded/".$name);
-            $url = "http://127.0.0.1/PHP/video%20upload%20and%20playback/uploaded/$name";
-            $upl= new Model();
-            $mov=$upl->inserVideos($name,$url);
-            if move_uploaded_file($temp,"Videos/".$name); {
-                $msg = "Image uploaded successfully";
+            $target = $_SERVER['DOCUMENT_ROOT'] . "/test-project/movies_new3/Views/img/";
+            move_uploaded_file($temp,$target.$name);
+            $url = "http://127.0.0.1/PHP/video%20upload%20and%20playback/img/$name";
+            $upl = new Model();
+            $mov = $upl->inserVideos($name, $url);
+            if(move_uploaded_file($temp,   $target . $name)){
+                $msg = "Video uploaded successfully";
             }else{
-                $msg = "Failed to upload image";
+                $msg = "Failed to upload video";
             }
-        }*/
-
-
+        }
     }
+    public function ShowVid(){
+
+        $id = $_GET['id'];
+        $insert1 = new Model();
+        $result = $insert1->getVideosbyid($id);
+        return $result;
+    }
+
 }
+
 class UploadPicture
 {
     public function UplPic()
     {
-if (isset($_POST['upload'])) {
-    $image = $_FILES['image']['name'];
-    $target = $_SERVER['DOCUMENT_ROOT'] . "/test-project/movies_new3/Views/img/".basename($image);
-    move_uploaded_file($_FILES["image"]["tmp_name"], $target);
-    $insert = new Model();
-    $inspic=$insert->insertPictures($image);
+        if (isset($_POST['upload'])) {
+            $image = $_FILES['image']['name'];
+            $target = $_SERVER['DOCUMENT_ROOT'] . "/test-project/movies_new3/Views/img/" . basename($image);
+            move_uploaded_file($_FILES["image"]["tmp_name"], $target);
+            $insert = new Model();
+            $inspic = $insert->insertPictures($image);
 
-    if (move_uploaded_file($_FILES['image']['tmp_name'], $target)){
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
                 $msg = "Image uploaded successfully";
-    }else{
-        $msg = "Failed to upload image";
-    }
+            } else {
+                $msg = "Failed to upload image";
             }
+        }
     }
 
-   public function ShowPic(){
-        $insert1= new Model();
-        $result= $insert1->getAllpictures();
+    public function ShowPic()
+    {
+        $insert1 = new Model();
+        $result = $insert1->getAllpictures();
         return $result;
     }
 }

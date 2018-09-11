@@ -101,8 +101,11 @@ switch($page){
     case 'showgenresform':
         $controller->showGenresForm();
         break;
-    case 'insertagm':
-        $controller->insertagm();
+    case 'insertactorsinmovies':
+        $controller->insertactorsinmovies();
+        break;
+    case 'insertgenresinmovies':
+        $controller->insertgenresinmovies();
         break;
     case 'login':
         $controller->Login();
@@ -124,6 +127,9 @@ switch($page){
         break;
     case 'showhomepage':
         $controller->showHomePage();
+        break;
+    case 'showmovie':
+        $controller->showMovie();
         break;
     case 'showadminspage':
         $controller->showAdminPage();
